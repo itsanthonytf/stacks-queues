@@ -1,0 +1,38 @@
+class BrowserHistory {
+  constructor() {
+    this.backStack = [];
+    this.forwardStack = [];
+  }
+
+  visitSite(site) {
+    this.backStack.push(site);
+    this.forwardStack = [];
+  }
+
+  goBack() {
+    if (this.backStack.length > 1) {
+      const currentSite = this.backStack.pop();
+      this.forwardStack.push(currentSite);
+      return this.backStack[this.backStack.length - 1];
+    }
+    return null;
+  }
+
+  goForward() {
+    if (this.forwardStack.length > 0) {
+      const currentSite = this.forwardStack.pop();
+      this.backStack.push(currentSite);
+      return currentSite;
+    }
+    return null;
+  }
+}
+
+// Example Usage
+const browser = new BrowserHistory();
+browser.visitSite('Google');
+browser.visitSite('Yahoo');
+browser.visitSite('EBay');
+browser.goBack();
+browser.goForward();
+browser.visitSite('Apple');
