@@ -1,0 +1,17 @@
+function findSurvivor(totalPeople, skip) {
+  let people = Array.from({ length: totalPeople }, (_, index) => index + 1);
+  let index = 0;
+
+  while (people.length > 1) {
+    index = (index + skip - 1) % people.length;
+    people.splice(index, 1);
+  }
+
+  return people[0];
+}
+
+// Example Usage
+const totalPeople = 10;
+const skip = 3;
+const survivor = findSurvivor(totalPeople, skip);
+console.log(`The survivor is person #${survivor}`);
