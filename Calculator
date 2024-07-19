@@ -1,0 +1,34 @@
+function polishNotationCalculator(expression) {
+    const tokens = expression.split(' ');
+
+    const stack = [];
+    const operators = '+-*/';
+
+    for (let token of tokens) {
+        if (operators.includes(token)) {
+            const b = stack.pop();
+            const a = stack.pop();
+            switch (token) {
+                case '+':
+                    stack.push(a + b);
+                    break;
+                case '-':
+                    stack.push(a - b);
+                    break;
+                case '*':
+                    stack.push(a * b);
+                    break;
+                case '/':
+                    stack.push(a / b);
+                    break;
+            }
+        } else {
+            stack.push(parseFloat(token));
+        }
+    }
+
+    return stack.pop();
+}
+
+const expression = '+ 1 * 2 3';
+console.log(polishNotationCalculator(expression)); // Output: 7
